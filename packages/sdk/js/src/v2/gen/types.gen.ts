@@ -5044,7 +5044,9 @@ export type SessionForkResponses = {
 export type SessionForkResponse = SessionForkResponses[keyof SessionForkResponses]
 
 export type SessionAbortData = {
-  body?: never
+  body?: {
+    queuedPolicy?: "drop" | "keep-suspended"
+  }
   path: {
     sessionID: string
   }
@@ -5072,7 +5074,10 @@ export type SessionAbortResponses = {
   /**
    * Aborted session
    */
-  200: boolean
+  200: {
+    ok: boolean
+    epoch: number
+  }
 }
 
 export type SessionAbortResponse = SessionAbortResponses[keyof SessionAbortResponses]
